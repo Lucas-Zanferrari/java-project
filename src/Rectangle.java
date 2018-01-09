@@ -5,7 +5,7 @@ public class Rectangle {
 
     public void Rectangle(int length, int width){
         this.length = length;
-        this width = width;
+        this.width = width;
     }
 
     public int getArea() {
