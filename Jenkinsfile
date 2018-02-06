@@ -6,7 +6,7 @@ pipeline {
   }
 
   stages {
-    stage('unit tests') {
+    stage('Unit tests') {
       agent {
         label 'apache'
       }
@@ -16,7 +16,7 @@ pipeline {
       }
     }
 
-    stage('build') {
+    stage('Build') {
       agent {
         label 'apache'
       }
@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-    stage('deploy') {
+    stage('Deploy') {
       agent {
         label 'apache'
       }
@@ -39,23 +39,33 @@ pipeline {
       }
     }
 
-    stage('running on mac osx') {
+    stage('Run on Mac OSX') {
       agent {
         label 'osx'
       }
       steps {
         sh "curl https://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
+        sh "rm rectangle_${env.BUILD_NUMBER -}.jar"
       }
     }
 
-    stage('test on Debian') {
+    stage('Test on Debian') {
       agent {
         docker 'openjdk:8u151-jre'
       }
       steps {
         sh "wget https://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
+      }
+    }
+
+    stage('Promote to green') {
+      agent {
+        label 'apache'
+      }
+      steps {
+        sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
       }
     }
   }
