@@ -39,14 +39,13 @@ pipeline {
       }
     }
 
-    stage('Run on Mac OSX') {
+    stage('Test on Mac OSX') {
       agent {
         label 'osx'
       }
       steps {
         sh "curl https://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
-        sh "rm rectangle_${env.BUILD_NUMBER -}.jar"
       }
     }
 
