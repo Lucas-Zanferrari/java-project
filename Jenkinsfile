@@ -44,7 +44,17 @@ pipeline {
         label 'osx'
       }
       steps {
-        sh "curl http://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
+        sh "curl https://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
+      }
+    }
+
+    stage('test on Debian') {
+      agent {
+        docker 'openjdk:8u151-jre'
+      }
+      steps {
+        sh "wget https://70e1e17e.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
       }
     }
