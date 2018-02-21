@@ -44,7 +44,7 @@ pipeline {
     //     label 'osx'
     //   }
     //   steps {
-    //     sh "curl https://90d5a04c.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
+    //     sh "curl https://9594d372.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar -o rectangle_${env.BUILD_NUMBER}.jar"
     //     sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
     //   }
     // }  
@@ -54,7 +54,7 @@ pipeline {
         docker 'openjdk:8u151-jre'
       }
       steps {
-        sh "wget https://90d5a04c.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget https://9594d372.ngrok.io/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 3 4"
       }
     }
