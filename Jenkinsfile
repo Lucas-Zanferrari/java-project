@@ -6,7 +6,7 @@ pipeline {
   }
 
   stages {
-    
+
     stage('Unit tests') {
       agent {
         label 'apache'
@@ -95,4 +95,5 @@ pipeline {
     }
     
   }
+  
 }
