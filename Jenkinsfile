@@ -6,6 +6,7 @@ pipeline {
   }
 
   stages {
+    
     stage('Unit tests') {
       agent {
         label 'apache'
@@ -86,7 +87,7 @@ pipeline {
         sh "git checkout development"
         echo "Checking out the master branch"
         sh "git checkout master"
-        echo "Mergig development branch into master branch"
+        echo "Merging development branch into master branch"
         sh "git merge development"
         echo "Pushing to origin master"
         sh "git push origin master"
