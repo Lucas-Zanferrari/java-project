@@ -6,7 +6,6 @@ pipeline {
   }
 
   stages {
-
     stage('Unit tests') {
       agent {
         label 'apache'
@@ -93,6 +92,5 @@ pipeline {
         sh "git push origin master"
       }
     }
-    
   }
 }
