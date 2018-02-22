@@ -10,6 +10,7 @@ pipeline {
   }
 
   stages {
+
     stage('Say hello') {
       agent any
       steps {
@@ -141,4 +142,5 @@ pipeline {
       )
     }
   }
+  
 }
