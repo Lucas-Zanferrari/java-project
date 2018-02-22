@@ -121,9 +121,9 @@ pipeline {
       post {
         success {
           emailext(
-            subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Promoted to Master",
-            body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development Promoted to Master:</p>
-            <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+            subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Branch Promoted to Master.",
+            body: """<p><b>${env.JOB_NAME} [${env.BUILD_NUMBER}]</b> - Development Branch Promoted to Master:</p>
+            <p>Check console output at <a href='${env.BUILD_URL}/console'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
             to: "lucas.zanferrari@gmail.com"
           )
         }
@@ -135,8 +135,8 @@ pipeline {
     failure {
       emailext(
         subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
-        body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!:</p>
-        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+        body: """<p><b>${env.JOB_NAME} [${env.BUILD_NUMBER}]</b> Failed!</p>
+        <p>Check console output at <a href='${env.BUILD_URL}/console'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
         to: "lucas.zanferrari@gmail.com"
       )
     }
