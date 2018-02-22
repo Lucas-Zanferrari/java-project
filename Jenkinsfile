@@ -10,6 +10,13 @@ pipeline {
   }
 
   stages {
+    stage('Say hello') {
+      agent any
+      steps {
+        sayHello "awesome student"
+      }
+    }
+
     stage('Unit tests') {
       agent {
         label 'apache'
@@ -49,7 +56,7 @@ pipeline {
     //     label 'osx'
     //   }
     //   steps {
-    //     sh "curl https://9594d372.ngrok.io/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar -o rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+    //     sh "curl https://d23ca0c4.ngrok.io/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar -o rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
     //     sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
     //   }
     // }  
@@ -59,7 +66,7 @@ pipeline {
         docker 'openjdk:8u151-jre'
       }
       steps {
-        sh "wget https://9594d372.ngrok.io/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+        sh "wget https://d23ca0c4.ngrok.io/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 3 4"
       }
     }
@@ -105,7 +112,7 @@ pipeline {
           emailext(
             subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Promoted to Master",
             body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development Promoted to Master:</p>
-            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+            <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
             to: "lucas.zanferrari@gmail.com"
           )
         }
@@ -118,7 +125,7 @@ pipeline {
       emailext(
         subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
         body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!:</p>
-        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
         to: "lucas.zanferrari@gmail.com"
       )
     }
