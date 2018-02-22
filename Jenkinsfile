@@ -20,10 +20,10 @@ pipeline {
     stage('Git information') {
       agent any
       steps {
-        echo "My branch name: ${env.BRANCH_NAME}"
+        echo "My Branch Name: ${env.BRANCH_NAME}"
         script {
-          def myLibrary = new linuxacademy.git.gitStuff();
-          echo "My commit: ${myLibrary.gitCommit('${env.WORKSPACE}/.git')}"
+          def myLib = new linuxacademy.git.gitStuff();
+          echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
         }
       }
     }
